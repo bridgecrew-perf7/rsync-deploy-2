@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: 'Rsync Deployment'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy files
+        uses: ./
+        with:
+          user: ${{ secrets.SSH_USER }}
+          server: ${{ secrets.SSH_SERVER }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: '.github'
+          remote_path: 'www'
+          switches: '-avzr --exclude node_modules'

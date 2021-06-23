@@ -1,0 +1,36 @@
+name: "Rsync Deployment"
+description: "Deploy file to your server use rsync and a ssh private key"
+inputs:
+  user:
+    description: "Username"
+    required: true
+  server:
+    description: "Your SSH server"
+    required: true
+  port:
+    description: "Your ssh server port, default is 22"
+    required: true
+    default: "22"
+  ssh_private_key:
+    description: "You can copy private_key from your *.pem file, keep format"
+    required: true
+  local_path:
+    description: "will put all file under this path"
+    required: true
+    default: ./*
+  remote_path:
+    description: "files will copy to under remote_path"
+    required: true
+    default: /
+  switches:
+    description: "files will copy to under remote_path"
+    required: false
+    default: "-azP"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "cloud-lightning"
+  color: "orange"
